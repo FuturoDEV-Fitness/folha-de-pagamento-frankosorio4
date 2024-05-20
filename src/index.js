@@ -12,25 +12,25 @@ let nomeEmpregado = "";
 let cpfEmpregado = "";
 let salarioBruto = 0;
 
-function askQuestion(questionText) {
+function obterData(questionText) {
     return new Promise((resolve) => {
-        input.question(questionText, (answer) => resolve(answer.trim()));
+        input.question(questionText, (response) => resolve(response.trim()));
     });
 }
 
 async function main() {
-    nomeEmpregado = await askQuestion("Digite o nome do Empregado: ");
+    nomeEmpregado = await obterData("Digite o nome do Empregado: ");
 
     while (true) {
-        cpfEmpregado = await askQuestion("Digite o cpf do Empregado (só números): ");
+        cpfEmpregado = await obterData("Digite o cpf do Empregado (só números): ");
         if (!isNaN(cpfEmpregado) && Number(cpfEmpregado) > 0 && cpfEmpregado.length === 11) {
             break;
         }
-        console.log("CPF inválido. Deve ser um número de 11 dígitos maior que zero.");
+        console.log("CPF inválido. O CPF deve ser um número de 11 dígitos maior que zero.");
     }
 
     while (true) {
-        const salario = await askQuestion("Digite o salário bruto do Empregado (só números): ");
+        const salario = await obterData("Digite o salário bruto do Empregado (só números): ");
         if (!isNaN(salario) && Number(salario) > 0) {
             salarioBruto = Number(salario);
             break;
